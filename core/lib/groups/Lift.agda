@@ -6,7 +6,7 @@ open import lib.types.Lift
 open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 
-module lib.groups.Lift where
+module lib.groups.Lift {{_ : UA}} where
 
 Lift-group-structure : ∀ {i j} {A : Type i}
   → GroupStructure A → GroupStructure (Lift {j = j} A)

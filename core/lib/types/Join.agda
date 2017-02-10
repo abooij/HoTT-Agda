@@ -8,7 +8,7 @@ open import lib.types.PushoutFmap
 open import lib.types.Sigma
 open import lib.types.Span
 
-module lib.types.Join  where
+module lib.types.Join  {{_ : UA}} where
 
 module _ {i j} (A : Type i) (B : Type j) where
 

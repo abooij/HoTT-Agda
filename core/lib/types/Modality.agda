@@ -4,12 +4,12 @@ open import lib.Basics
 open import lib.NType2
 open import lib.types.Sigma
 
-module lib.types.Modality where
+module lib.types.Modality {{_ : UA}} where
 
   -- Where to put this?  Or maybe there's
   -- a simpler proof from some library function?
   !ᵈ-inv-l-out : ∀ {ℓ} {A : Type ℓ} {P : A → Type ℓ}
-    {a₀ a₁ : A} {p : a₀ == a₁} {x₀ x₁ : P a₁} 
+    {a₀ a₁ : A} {p : a₀ == a₁} {x₀ x₁ : P a₁}
     → (q : x₀ == x₁ [ P ↓ ! p ∙ p ])
     → x₀ == x₁
   !ᵈ-inv-l-out {p = idp} q = q
@@ -134,7 +134,7 @@ module lib.types.Modality where
 
     is-◯-connected-is-prop : ∀ {A} → is-prop (is-◯-connected A)
     is-◯-connected-is-prop {A} = is-contr-is-prop
-    
+
     is-◯-equiv : {A B : Type ℓ} → (A → B) → Type ℓ
     is-◯-equiv {B = B} f = (b : B) → is-◯-connected (hfiber f b)
 
@@ -147,7 +147,7 @@ module lib.types.Modality where
     equiv-preserves-◯-conn : {A B : Type ℓ} → A ≃ B → is-◯-connected A → is-◯-connected B
     equiv-preserves-◯-conn e c = equiv-preserves-level (◯-emap e) c
 
-    total-◯-equiv : {A : Type ℓ} {P Q : A → Type ℓ} (φ : ∀ a → P a → Q a) → 
+    total-◯-equiv : {A : Type ℓ} {P Q : A → Type ℓ} (φ : ∀ a → P a → Q a) →
                      (∀ a → is-◯-equiv (φ a)) → is-◯-equiv (Σ-fmap-r φ)
     total-◯-equiv φ e (a , q) = equiv-preserves-◯-conn (hfiber-Σ-fmap-r φ q ⁻¹) (e a q)
 
@@ -287,4 +287,3 @@ module lib.types.Modality where
               inv-r : (ab : ◯ (A × B)) → ◯-pair (◯-split ab) == ab
               inv-r = ◯-elim (λ _ → ◯-=-is-local _ _)
                              (λ ab → ap ◯-pair (pair×= (◯-fst-β ab) (◯-snd-β ab)) ∙ ◯-pair-β (fst ab) (snd ab))
-

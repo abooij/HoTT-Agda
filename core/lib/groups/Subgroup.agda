@@ -10,7 +10,7 @@ open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 open import lib.groups.SubgroupProp
 
-module lib.groups.Subgroup where
+module lib.groups.Subgroup {{_ : UA}} where
 
 module _ {i j} {G : Group i} (P : SubgroupProp G j) where
   private

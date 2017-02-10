@@ -4,7 +4,7 @@ open import lib.Basics
 open import lib.types.Truncation
 open import lib.types.Pi
 
-module lib.types.Choice where
+module lib.types.Choice {{_ : UA}} where
 
 unchoose : ∀ {i j} {n : ℕ₋₂} {A : Type i} {B : A → Type j}
   → Trunc n (Π A B) → Π A (Trunc n ∘ B)

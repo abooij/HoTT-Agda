@@ -8,7 +8,7 @@ open import lib.types.Pushout
 open import lib.types.Sigma
 open import lib.types.Span
 
-module lib.types.PushoutFmap where
+module lib.types.PushoutFmap {{_ : UA}} where
 
 module PushoutFmap {i₀ j₀ k₀ i₁ j₁ k₁} {span₀ : Span {i₀} {j₀} {k₀}}
   {span₁ : Span {i₁} {j₁} {k₁}} (span-map : SpanMap span₀ span₁)

@@ -5,7 +5,7 @@ open import lib.types.Sigma
 open import lib.types.Bool
 open import lib.types.Int
 
-module lib.types.List where
+module lib.types.List {{_ : UA}} where
 
 infixr 60 _::_
 

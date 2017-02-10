@@ -7,7 +7,7 @@ The generic nonrecursive higher inductive type with one point constructor and
 one paths constructor.
 -}
 
-module lib.types.Generic1HIT {i j} (A : Type i) (B : Type j)
+module lib.types.Generic1HIT {{_ : UA}} {i j} (A : Type i) (B : Type j)
   (g h : B → A) where
 
 

@@ -118,7 +118,7 @@ module _ {i j} {A : Type i} {B : Type j} where
     → p == pair×= (fst×= p) (snd×= p)
   pair×=-η {._} {_} idp = idp
 
-module _ {i j} {A : Type i} {B : A → Type j} where
+module _ {{_ : UA}} {i j} {A : Type i} {B : A → Type j} where
 
   =Σ : (x y : Σ A B) → Type (lmax i j)
   =Σ (a , b) (a' , b') = Σ (a == a') (λ p → b == b' [ B ↓ p ])
@@ -136,7 +136,7 @@ module _ {i j} {A : Type i} {B : A → Type j} where
   (q : B == B' [ (λ X → (X → Type j)) ↓ p ]) → Σ A B == Σ A' B'
 Σ= idp idp = idp
 
-Σ-level : ∀ {i j} {n : ℕ₋₂} {A : Type i} {P : A → Type j}
+Σ-level : {{_ : UA}} → ∀ {i j} {n : ℕ₋₂} {A : Type i} {P : A → Type j}
   → (has-level n A → ((x : A) → has-level n (P x))
     → has-level n (Σ A P))
 Σ-level {n = ⟨-2⟩} p q = (fst p , (fst (q (fst p)))) , lemma
@@ -147,7 +147,7 @@ module _ {i j} {A : Type i} {B : A → Type j} where
       (Σ-level (p _ _) λ _ →
         equiv-preserves-level ((to-transp-equiv _ _)⁻¹) (q _ _ _))
 
-×-level : ∀ {i j} {n : ℕ₋₂} {A : Type i} {B : Type j}
+×-level : {{_ : UA}} → ∀ {i j} {n : ℕ₋₂} {A : Type i} {B : Type j}
   → (has-level n A → has-level n B → has-level n (A × B))
 ×-level pA pB = Σ-level pA (λ x → pB)
 

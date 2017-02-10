@@ -8,7 +8,7 @@ open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 open import lib.groups.Lift
 
-module lib.groups.Unit where
+module lib.groups.Unit {{_ : UA}} where
 
 Unit-group-structure : GroupStructure Unit
 Unit-group-structure = record

@@ -5,7 +5,7 @@ open import lib.types.Truncation
 open import lib.types.Groupoid
 open import lib.types.PathSet
 
-module lib.groupoids.FundamentalPreGroupoid {i} (A : Type i) where
+module lib.groupoids.FundamentalPreGroupoid {i} (A : Type i) {{_ : UA}} where
 
   fundamental-pregroupoid : PreGroupoid i i
   fundamental-pregroupoid = record

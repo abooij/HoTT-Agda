@@ -5,7 +5,7 @@ open import lib.types.Empty
 open import lib.types.Sigma
 open import lib.types.Paths
 
-module lib.types.Pi where
+module lib.types.Pi {{_ : UA}} where
 
 Π-level : ∀ {i j} {A : Type i} {B : A → Type j} {n : ℕ₋₂}
   → (((x : A) → has-level n (B x)) → has-level n (Π A B))

@@ -5,7 +5,7 @@ open import lib.types.Pi
 open import lib.types.Paths
 open import lib.types.Sigma
 
-module lib.types.Flattening {i j k}
+module lib.types.Flattening {{_ : UA}} {i j k}
   (A : Type i) (B : Type j) (f g : B → A)
   (C : A → Type k) (D : (b : B) → C (f b) ≃ C (g b)) where
 

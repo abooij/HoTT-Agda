@@ -9,7 +9,7 @@ open import lib.types.Group
 open import lib.types.Nat
 open import lib.types.List
 
-module lib.types.Word {i} where
+module lib.types.Word {{_ : UA}} {i} where
 
 module _ (A : Type i) where
 

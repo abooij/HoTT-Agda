@@ -14,7 +14,7 @@ open import lib.groups.SubgroupProp
 open import lib.groups.Lift
 open import lib.groups.Unit
 
-module lib.groups.GroupProduct where
+module lib.groups.GroupProduct {{_ : UA}} where
 
 {- binary product -}
 ×-group-struct : ∀ {i j} {A : Type i} {B : Type j}

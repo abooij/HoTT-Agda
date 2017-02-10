@@ -10,7 +10,7 @@ open import lib.types.Group
 open import lib.groups.LoopSpace
 open import lib.groups.Homomorphism
 
-module lib.types.EilenbergMacLane1 {i} where
+module lib.types.EilenbergMacLane1 {i} {{_ : UA}} where
 
 module _ (G : Group i) where
 

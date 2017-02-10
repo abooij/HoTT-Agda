@@ -14,7 +14,7 @@ open import lib.groups.GroupProduct
 open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 
-module lib.groups.FreeAbelianGroup {i} where
+module lib.groups.FreeAbelianGroup {i} {{_ : UA}} where
 
 -- the relation for making the quotient.
 

@@ -7,7 +7,7 @@ open import lib.types.Paths
 open import lib.types.Unit
 open import lib.types.Empty
 
-module lib.Equivalence2 where
+module lib.Equivalence2 {{_ : UA}} where
 
 {- Pre- and post- composition with equivalences are equivalences -}
 module _ {i j k} {A : Type i} {B : Type j} {C : Type k}

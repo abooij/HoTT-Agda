@@ -13,7 +13,7 @@ open import lib.types.Span
 open import lib.types.Suspension
 open import lib.types.Wedge
 
-module lib.types.BigWedge where
+module lib.types.BigWedge {{_ : UA}} where
 
 module _ {i j} {A : Type i} where
 

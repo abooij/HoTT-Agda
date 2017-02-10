@@ -8,7 +8,7 @@ open import lib.types.Paths
 import lib.types.Generic1HIT as Generic1HIT
 open import lib.types.Pushout
 
-module lib.types.PushoutFlattening {i} {j} {k} {d : Span {i} {j} {k}} where
+module lib.types.PushoutFlattening {{_ : UA}} {i} {j} {k} {d : Span {i} {j} {k}} where
 
 open Span d renaming (f to g; g to h)
 

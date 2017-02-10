@@ -110,7 +110,7 @@ module _ {i} {D : ℕ → Type i} (d : (n : ℕ) → D n → D (S n)) where
 
 {- If all Dₙ are m-connected, then the colim is m-connected -}
 
-ncolim-conn : ∀ {i} {D : ℕ → Type i} (d : (n : ℕ) → D n → D (S n)) (m : ℕ₋₂)
+ncolim-conn : {{_ : UA}} → ∀ {i} {D : ℕ → Type i} (d : (n : ℕ) → D n → D (S n)) (m : ℕ₋₂)
   → ((n : ℕ) → is-connected m (D n))
   → is-connected m (ℕColim d)
 ncolim-conn {D = D} d ⟨-2⟩ cD = -2-conn (ℕColim d)

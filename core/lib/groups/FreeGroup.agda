@@ -12,7 +12,7 @@ open import lib.types.Word
 open import lib.types.SetQuotient
 open import lib.groups.Homomorphism
 
-module lib.groups.FreeGroup {i} where
+module lib.groups.FreeGroup {{_ : UA}} {i} where
 
 -- [qwr-sym] is not needed, but it seems more principled to
 -- make [QuotWordRel] an equivalence relation.

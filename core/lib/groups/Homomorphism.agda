@@ -10,7 +10,7 @@ open import lib.types.Subtype
 open import lib.types.Truncation
 open import lib.groups.SubgroupProp
 
-module lib.groups.Homomorphism where
+module lib.groups.Homomorphism {{_ : UA}} where
 
 {-
 Group homomorphisms.

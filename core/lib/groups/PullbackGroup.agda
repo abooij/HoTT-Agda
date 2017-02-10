@@ -6,7 +6,7 @@ open import lib.types.Pullback
 open import lib.types.Group
 open import lib.groups.Homomorphism
 
-module lib.groups.PullbackGroup where
+module lib.groups.PullbackGroup {{_ : UA}} where
 
 --   φ   ψ
 -- H → G ← K

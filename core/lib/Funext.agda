@@ -11,7 +11,7 @@ open import lib.PathGroupoid
 A proof of function extensionality from the univalence axiom.
 -}
 
-module lib.Funext {i} {A : Type i} where
+module lib.Funext {{_ : UA}} {i} {A : Type i} where
 
 -- Naive non dependent function extensionality
 

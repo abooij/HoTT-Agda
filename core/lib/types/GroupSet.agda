@@ -9,7 +9,7 @@ open import lib.types.Group
     The definition of G-sets.  Thanks to Daniel Grayson.
 -}
 
-module lib.types.GroupSet {i} where
+module lib.types.GroupSet {i} {{_ : UA}} where
 
   -- The right group action with respect to the group [grp].
   record GroupSetStructure (grp : Group i) {j} (El : Type j)

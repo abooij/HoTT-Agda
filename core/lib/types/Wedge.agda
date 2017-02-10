@@ -13,7 +13,7 @@ open import lib.types.Unit
 
 -- Wedge of two pointed types is defined as a particular case of pushout
 
-module lib.types.Wedge where
+module lib.types.Wedge {{_ : UA}} where
 
 module _ {i j} (X : Ptd i) (Y : Ptd j) where
 

@@ -10,7 +10,7 @@ open import lib.types.Cofiber
 open import lib.types.Sigma
 open import lib.types.Wedge
 
-module lib.types.Smash {i j} where
+module lib.types.Smash {i j} {{_ : UA}} where
 
 module _ (X : Ptd i) (Y : Ptd j) where
 

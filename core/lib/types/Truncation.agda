@@ -36,7 +36,7 @@ module TruncRec {i j} {n : ℕ₋₂} {A : Type i} {B : Type j} (p : has-level n
 
 open TruncRec public renaming (f to Trunc-rec)
 
-module TruncRecType {i j} {n : ℕ₋₂} {A : Type i} (d : A → n -Type j) where
+module TruncRecType {i j} {n : ℕ₋₂} {A : Type i} {{_ : UA}} (d : A → n -Type j) where
 
   open TruncRec (n -Type-level j) d public
 
@@ -73,7 +73,7 @@ module TruncRecType {i j} {n : ℕ₋₂} {A : Type i} (d : A → n -Type j) whe
 ⊙Trunc n ⊙[ A , a ] = ⊙[ Trunc n A , [ a ] ]
 
 
-module _ {i} {n : ℕ₋₂} {A : Type i} where
+module _ {i} {n : ℕ₋₂} {A : Type i} {{_ : UA}} where
 
   Trunc= : (a b : Trunc (S n) A) → n -Type i
   Trunc= = Trunc-elim (λ _ → →-level (n -Type-level i))
@@ -120,13 +120,13 @@ module _ {i} {n : ℕ₋₂} {A : Type i} where
 {- Universal property -}
 
 abstract
-  Trunc-rec-is-equiv : ∀ {i j} (n : ℕ₋₂) (A : Type i) (B : Type j)
+  Trunc-rec-is-equiv : {{_ : UA}} → ∀ {i j} (n : ℕ₋₂) (A : Type i) (B : Type j)
     (p : has-level n B) → is-equiv (Trunc-rec p :> ((A → B) → (Trunc n A → B)))
   Trunc-rec-is-equiv n A B p = is-eq _ (λ f → f ∘ [_])
     (λ f → λ= (Trunc-elim (λ _ → =-preserves-level p) (λ a → idp))) (λ f → idp)
 
 
-Trunc-preserves-level : ∀ {i} {A : Type i} {n : ℕ₋₂} (m : ℕ₋₂)
+Trunc-preserves-level : {{_ : UA}} → ∀ {i} {A : Type i} {n : ℕ₋₂} (m : ℕ₋₂)
  → has-level n A → has-level n (Trunc m A)
 Trunc-preserves-level {n = ⟨-2⟩} _ (a₀ , p) =
   ([ a₀ ] , Trunc-elim (λ _ → =-preserves-level Trunc-level)
@@ -155,14 +155,14 @@ unTrunc-equiv A nA = equiv f [_] (λ _ → idp) g-f where
 ⊙unTrunc-equiv {n = n} X nX = ≃-to-⊙≃ (unTrunc-equiv (de⊙ X) nX) idp
 
 -- Equivalence associated to the universal property
-Trunc-extend-equiv : ∀ {i j} (n : ℕ₋₂) (A : Type i) (B : Type j)
+Trunc-extend-equiv : {{_ : UA}} → ∀ {i j} (n : ℕ₋₂) (A : Type i) (B : Type j)
   (p : has-level n B) → (A → B) ≃ (Trunc n A → B)
 Trunc-extend-equiv n A B p = (Trunc-rec p , Trunc-rec-is-equiv n A B p)
 
 Trunc-fmap : ∀ {i j} {n : ℕ₋₂} {A : Type i} {B : Type j} → ((A → B) → (Trunc n A → Trunc n B))
 Trunc-fmap f = Trunc-rec Trunc-level ([_] ∘ f)
 
-Trunc-fmap2 : ∀ {i j k} {n : ℕ₋₂} {A : Type i} {B : Type j} {C : Type k}
+Trunc-fmap2 : {{_ : UA}} → ∀ {i j k} {n : ℕ₋₂} {A : Type i} {B : Type j} {C : Type k}
   → ((A → B → C) → (Trunc n A → Trunc n B → Trunc n C))
 Trunc-fmap2 f = Trunc-rec (Π-level (λ _ → Trunc-level)) (λ a → Trunc-fmap (f a))
 
@@ -184,7 +184,7 @@ Trunc-fmap-∘ g f =
   Trunc-elim (λ _ → =-preserves-level Trunc-level) (λ _ → idp)
 
 {- Pushing concatentation through Trunc= -}
-module _ {i} {n : ℕ₋₂} {A : Type i} where
+module _ {i} {n : ℕ₋₂} {A : Type i} {{_ : UA}} where
 
   {- concatenation in Trunc= -}
   Trunc=-∙ : {ta tb tc : Trunc (S n) A}
@@ -246,7 +246,7 @@ transport-Trunc : ∀ {i j} {A : Type i} {n : ℕ₋₂} (P : A → Type j)
   → transport (Trunc n ∘ P) p [ b ] == [ transport P p b ]
 transport-Trunc _ idp _ = idp
 
-Trunc-fuse : ∀ {i} (A : Type i) (m n : ℕ₋₂)
+Trunc-fuse : {{_ : UA}} → ∀ {i} (A : Type i) (m n : ℕ₋₂)
   → Trunc m (Trunc n A) ≃ Trunc (minT m n) A
 Trunc-fuse A m n = equiv
   (Trunc-rec (raise-level-≤T (minT≤l m n) Trunc-level)
@@ -266,7 +266,7 @@ Trunc-fuse A m n = equiv
                       (transport (λ k → has-level k (Trunc n A))
                                  (! q) Trunc-level)
 
-Trunc-fuse-≤ : ∀ {i} (A : Type i) {m n : ℕ₋₂} (m≤n : m ≤T n)
+Trunc-fuse-≤ : {{_ : UA}} → ∀ {i} (A : Type i) {m n : ℕ₋₂} (m≤n : m ≤T n)
   → Trunc m (Trunc n A) ≃ Trunc m A
 Trunc-fuse-≤ A m≤n = equiv
   (Trunc-rec Trunc-level
@@ -280,7 +280,7 @@ Trunc-fuse-≤ A m≤n = equiv
        (λ _ → idp)))
 
 {- Truncating a binary product is equivalent to truncating its components -}
-Trunc-×-econv : ∀ {i} {j} (n : ℕ₋₂) (A : Type i) (B : Type j)
+Trunc-×-econv : {{_ : UA}} → ∀ {i} {j} (n : ℕ₋₂) (A : Type i) (B : Type j)
   → Trunc n (A × B) ≃ Trunc n A × Trunc n B
 Trunc-×-econv n A B = equiv f g f-g g-f
   where
@@ -312,6 +312,6 @@ Trunc-×-econv n A B = equiv f g f-g g-f
     (λ _ → =-preserves-level Trunc-level)
     (λ ab → idp)
 
-Trunc-×-conv : ∀ {i} {j} (n : ℕ₋₂) (A : Type i) (B : Type j)
+Trunc-×-conv : {{_ : UA}} → ∀ {i} {j} (n : ℕ₋₂) (A : Type i) (B : Type j)
   → Trunc n (A × B) == Trunc n A × Trunc n B
 Trunc-×-conv n A B = ua (Trunc-×-econv n A B)

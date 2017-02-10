@@ -8,7 +8,7 @@ open import lib.types.Pi
 open import lib.types.Sigma
 open import lib.types.TLevel
 
-module lib.NType2 where
+module lib.NType2 {{_ : UA}} where
 
 module _ {i} {A : Type i} where
   abstract

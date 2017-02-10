@@ -11,7 +11,7 @@ open import lib.types.Truncation
 open import lib.groups.Homomorphism
 open import lib.groups.SubgroupProp
 
-module lib.groups.Isomorphism where
+module lib.groups.Isomorphism {{_ : UA}} where
 
 GroupStructureIso : ∀ {i j} {GEl : Type i} {HEl : Type j}
   (GS : GroupStructure GEl) (HS : GroupStructure HEl) → Type (lmax i j)

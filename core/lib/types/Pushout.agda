@@ -8,7 +8,7 @@ open import lib.types.Span
 open import lib.types.Paths
 import lib.types.Generic1HIT as Generic1HIT
 
-module lib.types.Pushout where
+module lib.types.Pushout {{_ : UA}} where
 
 module _ {i j k} where
 

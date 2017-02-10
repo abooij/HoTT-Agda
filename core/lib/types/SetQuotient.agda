@@ -5,7 +5,7 @@ open import lib.Relation
 open import lib.NType2
 open import lib.types.Pi
 
-module lib.types.SetQuotient {i} {A : Type i} {j} where
+module lib.types.SetQuotient {{_ : UA}} {i} {A : Type i} {j} where
 
 postulate  -- HIT
   SetQuot : (R : Rel A j) → Type (lmax i j)

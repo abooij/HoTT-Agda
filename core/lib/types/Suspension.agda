@@ -17,7 +17,7 @@ open import lib.cubical.Square
 
 -- Suspension is defined as a particular case of pushout
 
-module lib.types.Suspension where
+module lib.types.Suspension {{_ : UA}} where
 
 module _ {i} (A : Type i) where
 

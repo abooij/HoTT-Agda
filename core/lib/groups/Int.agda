@@ -10,7 +10,7 @@ open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 open import lib.groups.FreeAbelianGroup
 
-module lib.groups.Int where
+module lib.groups.Int {{_ : UA}} where
 
 ℤ-group-structure : GroupStructure ℤ
 ℤ-group-structure = record

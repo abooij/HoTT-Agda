@@ -5,7 +5,7 @@ open import lib.types.Pi
 open import lib.types.Sigma
 open import lib.types.CommutingSquare
 
-module lib.types.Span where
+module lib.types.Span {{_ : UA}} where
 
 record Span {i j k : ULevel} : Type (lsucc (lmax (lmax i j) k)) where
   constructor span
