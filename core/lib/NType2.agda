@@ -8,9 +8,9 @@ open import lib.types.Pi
 open import lib.types.Sigma
 open import lib.types.TLevel
 
-module lib.NType2 {{_ : UA}} where
+module lib.NType2 where
 
-module _ {i} {A : Type i} where
+module _ {i} {A : Type i} {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
   abstract
     has-dec-onesided-eq-is-prop : {x : A} → is-prop (has-dec-onesided-eq x)
     has-dec-onesided-eq-is-prop {x = x} = inhab-to-prop-is-prop λ dec →
@@ -55,7 +55,7 @@ abstract
   contr-to-contr-is-equiv f cA cB =
     is-eq f (λ _ → fst cA) (λ b → ! (snd cB _) ∙ snd cB b) (snd cA)
 
-  is-contr-is-prop : ∀ {i} {A : Type i} → is-prop (is-contr A)
+  is-contr-is-prop : {{_ : FUNEXT}} → ∀ {i} {A : Type i} → is-prop (is-contr A)
   is-contr-is-prop {A = A} = all-paths-is-prop (λ x y →
     pair= (snd x (fst y))
           (↓-Π-cst-app-in (λ a → ↓-idf=cst-in' (lemma x (fst y) a (snd y a))))) where
@@ -64,21 +64,21 @@ abstract
       → snd x a == snd x b ∙' p
     lemma x b ._ idp = idp
 
-  has-level-is-prop : ∀ {i} {n : ℕ₋₂} {A : Type i}
+  has-level-is-prop : {{_ : UA}} {{_ : FUNEXT}} → ∀ {i} {n : ℕ₋₂} {A : Type i}
     → is-prop (has-level n A)
   has-level-is-prop {n = ⟨-2⟩} = is-contr-is-prop
   has-level-is-prop {n = S n} =
     Π-level (λ x → Π-level (λ y → has-level-is-prop))
 
-  is-prop-is-prop : ∀ {i} {A : Type i} → is-prop (is-prop A)
+  is-prop-is-prop : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i} {A : Type i} → is-prop (is-prop A)
   is-prop-is-prop = has-level-is-prop
 
-  is-set-is-prop : ∀ {i} {A : Type i} → is-prop (is-set A)
+  is-set-is-prop : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i} {A : Type i} → is-prop (is-set A)
   is-set-is-prop = has-level-is-prop
 
 {- Subtypes. -}
 
-module _ {i j} {A : Type i} (P : SubtypeProp A j) where
+module _ {i j} {A : Type i} (P : SubtypeProp A j) {{_ : UA}} {{_ : FUNEXT}}  where
   private
     module P = SubtypeProp P
 
@@ -126,28 +126,28 @@ is-gpd = has-level 1
 
 -- Type of all n-truncated types
 
-has-level-prop : ∀ {i} → ℕ₋₂ → SubtypeProp (Type i) i
+has-level-prop : {{_ : UA}} {{_ : FUNEXT}} → ∀ {i} → ℕ₋₂ → SubtypeProp (Type i) i
 has-level-prop n = has-level n , λ _ → has-level-is-prop
 
-_-Type_ : (n : ℕ₋₂) (i : ULevel) → Type (lsucc i)
+_-Type_ : {{_ : UA}} {{_ : FUNEXT}} (n : ℕ₋₂) (i : ULevel) → Type (lsucc i)
 n -Type i = Subtype (has-level-prop {i} n)
 
-hProp : (i : ULevel) → Type (lsucc i)
+hProp : {{_ : UA}} {{_ : FUNEXT}}  → (i : ULevel) → Type (lsucc i)
 hProp i = -1 -Type i
 
-hSet : (i : ULevel) → Type (lsucc i)
+hSet : {{_ : UA}} {{_ : FUNEXT}} → (i : ULevel) → Type (lsucc i)
 hSet i = 0 -Type i
 
-_-Type₀ : (n : ℕ₋₂) → Type₁
+_-Type₀ : {{_ : UA}} {{_ : FUNEXT}}  → (n : ℕ₋₂) → Type₁
 n -Type₀ = n -Type lzero
 
-hProp₀ = hProp lzero
-hSet₀ = hSet lzero
+hProp₀ = {{_ : UA}} {{_ : FUNEXT}}  → hProp lzero
+hSet₀ = {{_ : UA}} {{_ : FUNEXT}}  → hSet lzero
 
 -- [n -Type] is an (n+1)-type
 
 abstract
-  ≃-level : ∀ {i j} {n : ℕ₋₂} {A : Type i} {B : Type j}
+  ≃-level : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i j} {n : ℕ₋₂} {A : Type i} {B : Type j}
     → (has-level n A → has-level n B → has-level n (A ≃ B))
   ≃-level {n = ⟨-2⟩} pA pB =
     ((cst (fst pB) , contr-to-contr-is-equiv _ pA pB)
@@ -156,19 +156,19 @@ abstract
   ≃-level {n = S n} pA pB =
     Σ-level (→-level pB) (λ _ → prop-has-level-S is-equiv-is-prop)
 
-  ≃-is-set : ∀ {i j} {A : Type i} {B : Type j}
+  ≃-is-set : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i j} {A : Type i} {B : Type j}
             → is-set A → is-set B → is-set (A ≃ B)
   ≃-is-set = ≃-level
 
-  universe-=-level : ∀ {i} {n : ℕ₋₂} {A B : Type i}
+  universe-=-level : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i} {n : ℕ₋₂} {A B : Type i}
     → (has-level n A → has-level n B → has-level n (A == B))
   universe-=-level pA pB = equiv-preserves-level ua-equiv (≃-level pA pB)
 
-  universe-=-is-set : ∀ {i} {A B : Type i}
+  universe-=-is-set : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i} {A B : Type i}
     → (is-set A → is-set B → is-set (A == B))
   universe-=-is-set = universe-=-level
 
-module _ {i} {n} where
+module _ {i} {n} {{_ : UA}} {{_ : FUNEXT}} where
   private
     prop : SubtypeProp {lsucc i} (Type i) i
     prop = has-level-prop n
@@ -198,22 +198,22 @@ module _ {i} {n} where
     nType-∙ = Subtype-∙ prop
 
 abstract
-  _-Type-level_ : (n : ℕ₋₂) (i : ULevel)
+  _-Type-level_ : {{_ : UA}} {{_ : FUNEXT}} → (n : ℕ₋₂) (i : ULevel)
     → has-level (S n) (n -Type i)
   (n -Type-level i) A B =
     equiv-preserves-level (nType=-econv A B)
                           (universe-=-level (snd A) (snd B))
 
-  hProp-is-set : (i : ULevel) → is-set (hProp i)
+  hProp-is-set : {{_ : UA}} {{_ : FUNEXT}}  → (i : ULevel) → is-set (hProp i)
   hProp-is-set i = -1 -Type-level i
 
-  hSet-level : (i : ULevel) → has-level 1 (hSet i)
+  hSet-level : {{_ : UA}} {{_ : FUNEXT}} → (i : ULevel) → has-level 1 (hSet i)
   hSet-level i = 0 -Type-level i
 
 {- The following two lemmas are in NType2 instead of NType because of cyclic
    dependencies -}
 
-module _ {i} {A : Type i} where
+module _ {i} {A : Type i} {{_ : UA}} {{_ : FUNEXT}}  where
   abstract
     raise-level-<T : {m n : ℕ₋₂} → (m <T n) → has-level m A → has-level n A
     raise-level-<T ltS = raise-level _

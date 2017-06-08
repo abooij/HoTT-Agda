@@ -63,7 +63,7 @@ module _ {i j k} (D : Cospan {i} {j} {k}) where
     (λ _ → idp)
     (λ _ → idp)
 
-module _ {{_ : UA}} {i j k} (n : ℕ₋₂) {D : Cospan {i} {j} {k}} where
+module _ {{_ : UA}} {{_ : FUNEXT}} {i j k} (n : ℕ₋₂) {D : Cospan {i} {j} {k}} where
   open Cospan D
 
   pullback-level : has-level n A → has-level n B → has-level n C

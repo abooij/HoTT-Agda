@@ -11,11 +11,11 @@ open import lib.PathGroupoid
 A proof of function extensionality from the univalence axiom.
 -}
 
-module lib.Funext {{_ : UA}} {i} {A : Type i} where
+module lib.Funext {i} {A : Type i} where
 
 -- Naive non dependent function extensionality
 
-module FunextNonDep {j} {B : Type j} {f g : A → B} (h : f ∼ g)
+module FunextNonDep {{_ : UA}} {j} {B : Type j} {f g : A → B} (h : f ∼ g)
   where
 
   private
@@ -56,7 +56,7 @@ open FunextNonDep using (λ=-nondep)
 
 -- Weak function extensionality (a product of contractible types is
 -- contractible)
-module WeakFunext {j} {P : A → Type j} (e : (x : A) → is-contr (P x)) where
+module WeakFunext {{_ : UA}} {j} {P : A → Type j} (e : (x : A) → is-contr (P x)) where
 
   P-is-Unit : P == (λ x → Lift Unit)
   P-is-Unit = λ=-nondep (λ x → ua (contr-equiv-LiftUnit (e x)))
@@ -68,7 +68,7 @@ module WeakFunext {j} {P : A → Type j} (e : (x : A) → is-contr (P x)) where
 
 -- Naive dependent function extensionality
 
-module FunextDep {j} {P : A → Type j} {f g : Π A P} (h : f ∼ g)
+module FunextDep {{_ : UA}} {j} {P : A → Type j} {f g : Π A P} (h : f ∼ g)
   where
 
   open WeakFunext
@@ -98,7 +98,7 @@ module FunextDep {j} {P : A → Type j} {f g : Π A P} (h : f ∼ g)
 
 -- Strong function extensionality
 
-module StrongFunextDep {j} {P : A → Type j} where
+module StrongFunextDep {{_ : UA}} {j} {P : A → Type j} where
 
   open FunextDep
 
@@ -139,20 +139,22 @@ module _ {j} {P : A → Type j} {f g : Π A P} where
   app= : f == g → f ∼ g
   app= p x = ap (λ u → u x) p
 
+module _ {{_ : UA}} {j} {P : A → Type j} {f g : Π A P} where
+
   abstract
-    λ= : f ∼ g → f == g
-    λ= = FunextDep.λ=
+    λ=' : f ∼ g → f == g
+    λ=' = FunextDep.λ=
 
-    app=-β : (p : f ∼ g) (x : A) → app= (λ= p) x == p x
-    app=-β = StrongFunextDep.app=-β
+    app=-β' : (p : f ∼ g) (x : A) → app= (λ=' p) x == p x
+    app=-β' = StrongFunextDep.app=-β
 
-    λ=-η : (p : f == g) → p == λ= (app= p)
-    λ=-η = StrongFunextDep.λ=-η
+    λ=-η' : (p : f == g) → p == λ=' (app= p)
+    λ=-η' = StrongFunextDep.λ=-η
 
-  λ=-equiv : (f ∼ g) ≃ (f == g)
-  λ=-equiv = (λ= , λ=-is-equiv) where
+  λ=-equiv' : (f ∼ g) ≃ (f == g)
+  λ=-equiv' = (λ=' , λ=-is-equiv) where
     abstract
-      λ=-is-equiv : is-equiv λ=
+      λ=-is-equiv : is-equiv λ='
       λ=-is-equiv = StrongFunextDep.λ=-is-equiv
 
   app=-equiv : (f == g) ≃ (f ∼ g)
@@ -160,3 +162,13 @@ module _ {j} {P : A → Type j} {f g : Π A P} where
     abstract
       app=-is-equiv : is-equiv app=
       app=-is-equiv = StrongFunextDep.app=-is-equiv
+
+module _ {{_ : FUNEXT}} {j} {P : A → Type j} {f g : Π A P} where
+  postulate
+    λ= : f ∼ g → f == g
+    app=-β : (p : f ∼ g) (x : A) → app= (λ= p) x == p x
+    λ=-η : (p : f == g) → p == λ= (app= p)
+    λ=-is-equiv : is-equiv λ=
+
+  λ=-equiv : (f ∼ g) ≃ (f == g)
+  λ=-equiv = (λ= , λ=-is-equiv) where

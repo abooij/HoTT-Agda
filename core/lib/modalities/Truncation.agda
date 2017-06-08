@@ -5,7 +5,7 @@ open import lib.NType2
 open import lib.types.Modality
 open import lib.types.Truncation
 
-module lib.modalities.Truncation {{_ : UA}} where
+module lib.modalities.Truncation {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 Trunc-modality : ∀ {i} n → Modality i
 Trunc-modality n = record {

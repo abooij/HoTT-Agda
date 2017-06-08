@@ -6,7 +6,7 @@ open import lib.types.CommutingSquare
 open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 
-module lib.groups.CommutingSquare {{_ : UA}} where
+module lib.groups.CommutingSquare {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 -- A new type to keep the parameters.
 record CommSquareᴳ {i₀ i₁ j₀ j₁}

@@ -6,7 +6,7 @@ open import lib.types.Pointed
 open import lib.types.Pushout
 open import lib.types.Span
 
-module lib.types.PushoutFlip {{_ : UA}} where
+module lib.types.PushoutFlip {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 module _ {i j k} {d : Span {i} {j} {k}} where
 

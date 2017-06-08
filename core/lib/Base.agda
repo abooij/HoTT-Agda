@@ -53,6 +53,17 @@ of-type A u = u
 infix 40 of-type
 syntax of-type A u =  u :> A
 
+{- Type theory features
+
+These are features that we can choose to take (or not).
+-}
+
+postulate
+  HIT : Type lzero
+  UA : Type lzero
+  FUNEXT : Type lzero
+  COIND : Type lzero
+
 {- Identity type
 
 The identity type is called [Path] and [_==_] because the symbol [=] is
@@ -89,9 +100,10 @@ J' B d idp = d
 This is a new pragma added to Agda to help create higher inductive types.
 -}
 
-infix 30 _↦_
-postulate  -- HIT
-  _↦_ : ∀ {i} {A : Type i} → A → A → Type i
+module _ {{_ : HIT}} where
+  infix 30 _↦_
+  postulate  -- HIT
+    _↦_ : ∀ {i} {A : Type i} → A → A → Type i
 
 {-# BUILTIN REWRITE _↦_ #-}
 
@@ -449,4 +461,3 @@ instance
   FromNeg.read TLevel-neg-reader 1 = S ⟨-2⟩
   FromNeg.read TLevel-neg-reader 2 = ⟨-2⟩
   FromNeg.read TLevel-neg-reader (S (S (S _))) ⦃()⦄
-

@@ -5,7 +5,7 @@ open import lib.types.Sigma
 open import lib.types.Bool
 open import lib.types.Int
 
-module lib.types.List {{_ : UA}} where
+module lib.types.List where
 
 infixr 60 _::_
 
@@ -13,7 +13,7 @@ data List {i} (A : Type i) : Type i where
   nil : List A
   _::_ : A → List A → List A
 
-module _ {i} {A : Type i} where
+module _ {i} {A : Type i} {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
   infixr 80 _++_
   _++_ : List A → List A → List A
   nil ++ l = l
@@ -127,7 +127,7 @@ module _ {i} {A : Type i} where
   List=-out {l₁ = x :: l₁} {l₂ = nil} (lift ())
   List=-out {l₁ = x :: l₁} {l₂ = y :: l₂} (x=y , l₁=l₂) = ap2 _::_ x=y l₁=l₂
 
-module _ {i j} {A : Type i} {B : Type j} (f : A → B) where
+module _ {i j} {A : Type i} {B : Type j} (f : A → B) {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
   -- [map] in Haskell
   map : List A → List B
@@ -143,7 +143,7 @@ module _ {i j} {A : Type i} {B : Type j} (f : A → B) where
   reverse-map (x :: l) = {! ! (map-++ (reverse l) (x :: nil)) !}
 -}
 -- These functions use different [A], [B] or [f].
-module _ {i} {A : Type i} where
+module _ {i} {A : Type i} {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
   -- [concat] in Haskell
   concat : ∀ {i} {A : Type i} → List (List A) → List A
   concat l = foldr _++_ nil l

@@ -9,7 +9,7 @@ open import lib.groups.GroupProduct
 open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 
-module lib.groups.TruncationGroup {{_ : UA}} where
+module lib.groups.TruncationGroup {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 module _ {i} {El : Type i} (GS : GroupStructure El) where
 

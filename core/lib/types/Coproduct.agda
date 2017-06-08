@@ -136,7 +136,7 @@ codiag = Coprod-rec (idf _) (idf _)
     out-into (true , a) = idp
     out-into (false , b) = idp
 
-module _ {{_ : UA}} {i j k} {A : Type i} {B : Type j} (P : A ⊔ B → Type k) where
+module _ {{_ : UA}} {{_ : FUNEXT}} {i j k} {A : Type i} {B : Type j} (P : A ⊔ B → Type k) where
   Π₁-⊔-equiv-× : Π (A ⊔ B) P ≃ Π A (P ∘ inl) × Π B (P ∘ inr)
   Π₁-⊔-equiv-× = equiv to from to-from from-to
     where

@@ -7,7 +7,7 @@ open import lib.types.LoopSpace
 open import lib.groups.Homomorphism
 open import lib.groups.Isomorphism
 
-module lib.groups.LoopSpace {{_ : UA}} where
+module lib.groups.LoopSpace {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 {- A loop space is a pregroup, and a group if it has the right level -}
 module _ {i} (n : ℕ) (X : Ptd i) where

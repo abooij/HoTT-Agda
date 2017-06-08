@@ -7,7 +7,7 @@ The generic nonrecursive higher inductive type with one point constructor and
 one paths constructor.
 -}
 
-module lib.types.Generic1HIT {{_ : UA}} {i j} (A : Type i) (B : Type j)
+module lib.types.Generic1HIT {{_ : UA}} {{_ : FUNEXT}} {i j} (A : Type i) (B : Type j)
   (g h : B → A) where
 
 
@@ -16,7 +16,7 @@ data T : Type where
   cc : A → T
   pp : (b : B) → cc (f' b) ≡ cc (g b)
 -}
-module _ where
+module _ {{_ : HIT}} where
 
   postulate  -- HIT
     T : Type (lmax i j)
@@ -36,7 +36,7 @@ module _ where
 
 open Elim public using () renaming (f to elim)
 
-module Rec {k} {C : Type k} (cc* : A → C)
+module Rec {{_ : HIT}} {k} {C : Type k} (cc* : A → C)
   (pp* : (b : B) → cc* (g b) == cc* (h b)) where
 
   private module M = Elim cc* (λ b → ↓-cst-in (pp* b))
@@ -47,7 +47,7 @@ module Rec {k} {C : Type k} (cc* : A → C)
   pp-β : (b : B) → ap f (pp b) == pp* b
   pp-β b = apd=cst-in {f = f} (M.pp-β b)
 
-module RecType {k} (C : A → Type k) (D : (b : B) → C (g b) ≃ C (h b)) where
+module RecType {{_ : HIT}} {k} (C : A → Type k) (D : (b : B) → C (g b) ≃ C (h b)) where
 
   open Rec C (ua ∘ D) public
 

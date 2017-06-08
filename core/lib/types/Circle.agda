@@ -11,7 +11,7 @@ open import lib.types.Bool
 open import lib.types.Suspension
 open import lib.types.IteratedSuspension
 
-module lib.types.Circle {{_ : UA}} where
+module lib.types.Circle {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 {-
 Idea :

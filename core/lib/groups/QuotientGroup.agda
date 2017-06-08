@@ -11,7 +11,7 @@ open import lib.groups.Homomorphism
 open import lib.groups.Subgroup
 open import lib.groups.SubgroupProp
 
-module lib.groups.QuotientGroup {{_ : UA}} where
+module lib.groups.QuotientGroup {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 module _ {i j} {G : Group i} (P : NormalSubgroupProp G j) where
 

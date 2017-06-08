@@ -18,7 +18,7 @@ open import lib.groups.LoopSpace
 open import lib.groups.TruncationGroup
 open import lib.groups.Unit
 
-module lib.groups.HomotopyGroup {{_ : UA}} where
+module lib.groups.HomotopyGroup {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 {- Higher homotopy groups -}
 module _ {i} where

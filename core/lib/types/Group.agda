@@ -242,7 +242,7 @@ contr-is-trivialᴳ G El-is-contr g =
 
 {- group-structure= -}
 
-module _ {{_ : UA}} where
+module _ {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
   open GroupStructure
 
   abstract

@@ -5,7 +5,7 @@ open import lib.types.Empty
 open import lib.types.Sigma
 open import lib.types.Paths
 
-module lib.types.Pi {{_ : UA}} where
+module lib.types.Pi {{_ : FUNEXT}} where
 
 Π-level : ∀ {i j} {A : Type i} {B : A → Type j} {n : ℕ₋₂}
   → (((x : A) → has-level n (B x)) → has-level n (Π A B))
@@ -41,7 +41,7 @@ module _ {i} {A : Type i} where
     ¬-is-prop : is-prop (¬ A)
     ¬-is-prop = →-is-prop ⊥-is-prop
 
-module _ {i j} {X : Ptd i} {Y : Ptd j} where
+module _ {{_ : UA}} {i j} {X : Ptd i} {Y : Ptd j} where
   abstract
     ⊙→-level : {n : ℕ₋₂} → has-level n (de⊙ Y) → has-level n (X ⊙→ Y)
     ⊙→-level pY = Σ-level (→-level pY) (λ _ → =-preserves-level pY)

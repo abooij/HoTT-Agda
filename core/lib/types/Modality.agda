@@ -4,7 +4,7 @@ open import lib.Basics
 open import lib.NType2
 open import lib.types.Sigma
 
-module lib.types.Modality {{_ : UA}} where
+module lib.types.Modality {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
   -- Where to put this?  Or maybe there's
   -- a simpler proof from some library function?

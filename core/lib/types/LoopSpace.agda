@@ -11,7 +11,7 @@ open import lib.types.Sigma
 open import lib.types.TLevel
 open import lib.types.Truncation
 
-module lib.types.LoopSpace {{_ : UA}} where
+module lib.types.LoopSpace {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 {- loop space -}
 

@@ -3,7 +3,7 @@
 open import lib.Basics
 open import lib.types.Paths
 
-module lib.types.Torus where
+module lib.types.Torus {{_ : HIT}} where
 
 {-
 data Torus : Type₀ where

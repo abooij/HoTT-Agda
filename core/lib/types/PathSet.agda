@@ -7,7 +7,7 @@ open import lib.types.Truncation
 
 -- This module is dedicated to [Trunc 0 (x == y)]
 
-module lib.types.PathSet {{_ : UA}} where
+module lib.types.PathSet {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 _=₀_ : ∀ {i} {A : Type i} → A → A → Type i
 _=₀_ x y = Trunc 0 (x == y)

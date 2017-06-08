@@ -5,7 +5,7 @@ open import lib.types.Coproduct
 open import lib.types.Empty
 open import lib.types.Pi
 
-module lib.Relation2 {{_ : UA}} where
+module lib.Relation2 {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 module _ {i} {P : Type i} where
 

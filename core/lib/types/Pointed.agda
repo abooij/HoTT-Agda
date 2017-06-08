@@ -13,7 +13,7 @@ This file contains various lemmas that rely on lib.types.Paths or
 functional extensionality for pointed maps.
 -}
 
-module lib.types.Pointed {{_ : UA}} where
+module lib.types.Pointed {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 {- Pointed maps -}
 

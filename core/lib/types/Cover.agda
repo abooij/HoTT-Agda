@@ -10,7 +10,7 @@ open import lib.types.LoopSpace
 open import lib.types.Truncation
 open import lib.types.PathSet
 
-module lib.types.Cover {i} {{_ : UA}} where
+module lib.types.Cover {i} {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 {-
   The definition of covering spaces.

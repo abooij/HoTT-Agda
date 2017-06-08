@@ -3,7 +3,7 @@
 open import lib.Basics
 open import lib.types.List
 
-module lib.types.HList {{_ : UA}} where
+module lib.types.HList {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 data HList {i} : List (Type i) → Type (lsucc i) where
   nil : HList nil

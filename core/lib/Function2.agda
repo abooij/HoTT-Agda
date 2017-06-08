@@ -3,7 +3,7 @@
 open import lib.Basics
 open import lib.types.Truncation
 
-module lib.Function2 {{_ : UA}} where
+module lib.Function2 {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 is-surj : ∀ {i j} {A : Type i} {B : Type j} (f : A → B) → Type (lmax i j)
 is-surj {A = A} f = ∀ b → Trunc -1 (hfiber f b)

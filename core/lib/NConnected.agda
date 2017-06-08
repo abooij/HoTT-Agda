@@ -11,7 +11,7 @@ open import lib.types.Paths
 open import lib.types.TLevel
 open import lib.types.Truncation
 
-module lib.NConnected {{_ : UA}} where
+module lib.NConnected {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
 
 is-connected : ∀ {i} → ℕ₋₂ → Type i → Type i
 is-connected n A = is-contr (Trunc n A)
