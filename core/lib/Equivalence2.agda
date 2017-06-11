@@ -7,10 +7,10 @@ open import lib.types.Paths
 open import lib.types.Unit
 open import lib.types.Empty
 
-module lib.Equivalence2 {{_ : UA}} {{_ : FUNEXT}} where
+module lib.Equivalence2 where
 
 {- Pre- and post- composition with equivalences are equivalences -}
-module _ {i j k} {A : Type i} {B : Type j} {C : Type k}
+module _ {{_ : FUNEXT}} {i j k} {A : Type i} {B : Type j} {C : Type k}
          {h : A → B} (e : is-equiv h) where
 
   pre∘-is-equiv : is-equiv (λ (k : B → C) → k ∘ h)
@@ -28,7 +28,7 @@ module _ {i j k} {A : Type i} {B : Type j} {C : Type k}
           g-f = λ k → ap (_∘ k) (λ= $ is-equiv.g-f e)
 
 {- The same thing on the abstraction level of equivalences -}
-module _ {i j k} {A : Type i} {B : Type j} {C : Type k}
+module _ {{_ : FUNEXT}} {i j k} {A : Type i} {B : Type j} {C : Type k}
          (e : A ≃ B) where
 
   pre∘-equiv : (B → C) ≃ (A → C)
@@ -54,7 +54,7 @@ contr-map-is-equiv {f = f} cm = is-eq _
   (λ a → ap fst (snd (cm (f a)) (a , idp)))
 
 
-fiber=-econv : ∀ {i j} {A : Type i} {B : Type j} {h : A → B} {y : B}
+fiber=-econv : {{_ : FUNEXT}} {{_ : UA}} → ∀ {i j} {A : Type i} {B : Type j} {h : A → B} {y : B}
   (r s : Σ A (λ x → h x == y))
   → (r == s) ≃ Σ (fst r == fst s) (λ γ → ap h γ ∙ snd s == snd r)
 fiber=-econv r s = Σ-emap-r (λ γ → !-equiv ∘e (↓-app=cst-econv ⁻¹)) ∘e ((=Σ-econv r s)⁻¹)
@@ -77,7 +77,7 @@ module _ {i j} {A : Type i} {B : Type j} where
                        (λ g-f → ∀ x → ap f (g-f x) == f-g (f x))
 
 
-module _ {i j} {A : Type i} {B : Type j} {f : A → B} (e : is-equiv f) where
+module _ {{_ : FUNEXT}} {i j} {A : Type i} {B : Type j} {f : A → B} (e : is-equiv f) where
 
   equiv-linv-is-contr : is-contr (linv f)
   equiv-linv-is-contr = equiv-preserves-level (Σ-emap-r λ _ → λ=-equiv ⁻¹)
@@ -87,7 +87,7 @@ module _ {i j} {A : Type i} {B : Type j} {f : A → B} (e : is-equiv f) where
   equiv-rinv-is-contr = equiv-preserves-level (Σ-emap-r λ _ → λ=-equiv ⁻¹)
                           (equiv-is-contr-map (post∘-is-equiv e) (idf B))
 
-module _ {i j} {A : Type i} {B : Type j} {f : A → B} where
+module _ {{_ : FUNEXT}} {{_ : UA}} {i j} {A : Type i} {B : Type j} {f : A → B} where
 
   rcoh-econv : (v : rinv f)
     → rcoh f v ≃ Π A (λ x → (fst v (f x) , snd v (f x)) == (x , idp {a = f x}))
@@ -106,7 +106,7 @@ module _ {i j} {A : Type i} {B : Type j} {f : A → B} where
         → coe-equiv (ap (λ q → q == snd v (fst v y)) (! (∙-unit-r _)))
 
 
-equiv-rcoh-is-contr : ∀ {i j} {A : Type i} {B : Type j} {f : A → B}
+equiv-rcoh-is-contr : {{_ : FUNEXT}} {{_ : UA}} → ∀ {i j} {A : Type i} {B : Type j} {f : A → B}
                       (e : is-equiv f) → (v : rinv f) → is-contr (rcoh f v)
 equiv-rcoh-is-contr {f = f} e v = equiv-preserves-level ((rcoh-econv v)⁻¹)
   (Π-level (λ x → =-preserves-level (equiv-is-contr-map e (f x))))
@@ -120,20 +120,20 @@ rinv-and-rcoh-is-equiv {h = h} = equiv f g (λ _ → idp) (λ _ → idp)
         g : is-equiv h → Σ (rinv h) (rcoh h)
         g t = ((is-equiv.g t , is-equiv.f-g t) , (is-equiv.g-f t , is-equiv.adj t))
 
-is-equiv-is-prop : ∀ {i j} {A : Type i} {B : Type j} {f : A → B}
+is-equiv-is-prop : {{_ : FUNEXT}} {{_ : UA}} → ∀ {i j} {A : Type i} {B : Type j} {f : A → B}
   → is-prop (is-equiv f)
 is-equiv-is-prop = inhab-to-contr-is-prop λ e →
   equiv-preserves-level rinv-and-rcoh-is-equiv
     (Σ-level (equiv-rinv-is-contr e) (equiv-rcoh-is-contr e))
 
-is-equiv-prop : ∀ {i j} {A : Type i} {B : Type j}
+is-equiv-prop : {{_ : FUNEXT}} {{_ : UA}} → ∀ {i j} {A : Type i} {B : Type j}
   → SubtypeProp (A → B) (lmax i j)
 is-equiv-prop = is-equiv , λ f → is-equiv-is-prop
 
-∘e-unit-r : ∀ {i} {A B : Type i} (e : A ≃ B) → (e ∘e ide A) == e
+∘e-unit-r : {{_ : FUNEXT}} {{_ : UA}} → ∀ {i} {A B : Type i} (e : A ≃ B) → (e ∘e ide A) == e
 ∘e-unit-r e = pair= idp (prop-has-all-paths is-equiv-is-prop _ _)
 
-ua-∘e : ∀ {i} {A B : Type i}
+ua-∘e : {{_ : FUNEXT}} {{_ : UA}} → ∀ {i} {A B : Type i}
   (e₁ : A ≃ B) {C : Type i} (e₂ : B ≃ C) → ua (e₂ ∘e e₁) == ua e₁ ∙ ua e₂
 ua-∘e =
   equiv-induction
@@ -158,7 +158,7 @@ module _ {j} {B : Empty → Type j} where
   Σ₁-Empty : Σ Empty B ≃ Empty
   Σ₁-Empty = equiv (⊥-rec ∘ fst) ⊥-rec ⊥-elim (⊥-rec ∘ fst)
 
-  Π₁-Empty : Π Empty B ≃ Unit
+  Π₁-Empty : {{_ : FUNEXT}} → Π Empty B ≃ Unit
   Π₁-Empty = equiv (cst tt) (cst ⊥-elim) (λ _ → contr-has-all-paths Unit-is-contr _ _) (λ _ → λ= ⊥-elim)
 
 Σ₂-Empty : ∀ {i} {A : Type i} → Σ A (λ _ → Empty) ≃ Empty

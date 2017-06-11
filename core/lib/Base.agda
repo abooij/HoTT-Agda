@@ -59,10 +59,12 @@ These are features that we can choose to take (or not).
 -}
 
 postulate
-  HIT : Type lzero
-  UA : Type lzero
-  FUNEXT : Type lzero
-  COIND : Type lzero
+  HIT : Type lzero -- all higher inductive types
+  UA : Type lzero -- univalence axiom
+  FUNEXT : Type lzero -- function extensionality
+  FUNEXT0 : Type lzero -- 0-valued function extensionality
+  COIND : Type lzero -- coinduction
+  PTRUNC : Type lzero -- propositional truncations
 
 {- Identity type
 
@@ -100,10 +102,9 @@ J' B d idp = d
 This is a new pragma added to Agda to help create higher inductive types.
 -}
 
-module _ {{_ : HIT}} where
-  infix 30 _↦_
-  postulate  -- HIT
-    _↦_ : ∀ {i} {A : Type i} → A → A → Type i
+infix 30 _↦_
+postulate  -- HIT
+  _↦_ : ∀ {i} {A : Type i} → A → A → Type i
 
 {-# BUILTIN REWRITE _↦_ #-}
 

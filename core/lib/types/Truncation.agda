@@ -6,9 +6,9 @@ open import lib.types.Pi
 open import lib.types.Sigma
 open import lib.NType2
 
-module lib.types.Truncation {{_ : HIT}} where
+module lib.types.Truncation where
 
-module _ {i} where
+module _ {{_ : HIT}} {i} where
 
   postulate  -- HIT
     Trunc : (n : ℕ₋₂) (A : Type i) → Type i
@@ -25,7 +25,7 @@ module _ {i} where
 
 open TruncElim public renaming (f to Trunc-elim)
 
-module TruncRec {i j} {n : ℕ₋₂} {A : Type i} {B : Type j} (p : has-level n B)
+module TruncRec {{_ : HIT}} {i j} {n : ℕ₋₂} {A : Type i} {B : Type j} (p : has-level n B)
   (d : A → B) where
 
   private
@@ -36,7 +36,7 @@ module TruncRec {i j} {n : ℕ₋₂} {A : Type i} {B : Type j} (p : has-level n
 
 open TruncRec public renaming (f to Trunc-rec)
 
-module TruncRecType {i j} {n : ℕ₋₂} {A : Type i} {{_ : UA}} {{_ : FUNEXT}} (d : A → n -Type j) where
+module TruncRecType {{_ : HIT}} {i j} {n : ℕ₋₂} {A : Type i} {{_ : UA}} {{_ : FUNEXT}} (d : A → n -Type j) where
 
   open TruncRec (n -Type-level j) d public
 
@@ -69,11 +69,11 @@ module TruncRecType {i j} {n : ℕ₋₂} {A : Type i} {{_ : UA}} {{_ : FUNEXT}}
     from-to (a , b) = from-to-aux a b
 
 
-⊙Trunc : ∀ {i} → ℕ₋₂ → Ptd i → Ptd i
+⊙Trunc : {{_ : HIT}} → ∀ {i} → ℕ₋₂ → Ptd i → Ptd i
 ⊙Trunc n ⊙[ A , a ] = ⊙[ Trunc n A , [ a ] ]
 
 
-module _ {i} {n : ℕ₋₂} {A : Type i} {{_ : UA}} {{_ : FUNEXT}} where
+module _ {{_ : HIT}} {{_ : UA}} {{_ : FUNEXT}} {i} {n : ℕ₋₂} {A : Type i} where
 
   Trunc= : (a b : Trunc (S n) A) → n -Type i
   Trunc= = Trunc-elim (λ _ → →-level (n -Type-level i))
@@ -117,7 +117,7 @@ module _ {i} {n : ℕ₋₂} {A : Type i} {{_ : UA}} {{_ : FUNEXT}} where
   Trunc=-path : (a b : Trunc (S n) A) → (a == b) == fst (Trunc= a b)
   Trunc=-path a b = ua (Trunc=-equiv a b)
 
-module _ where
+module _ {{_ : HIT}} where
   {- Universal property -}
 
   abstract
@@ -316,3 +316,31 @@ module _ where
   Trunc-×-conv : {{_ : UA}} {{_ : FUNEXT}} → ∀ {i} {j} (n : ℕ₋₂) (A : Type i) (B : Type j)
     → Trunc n (A × B) == Trunc n A × Trunc n B
   Trunc-×-conv n A B = ua (Trunc-×-econv n A B)
+
+module _ {{_ : PTRUNC}} {i} where
+
+  postulate  -- HIT
+    [[_]] : (A : Type i) → Type i
+    p[_] : {A : Type i} → A → [[ A ]]
+    PTrunc-level : {A : Type i} → is-prop ([[ A ]])
+
+  module PTruncElim {A : Type i} {j} {P : [[ A ]] → Type j}
+    (p : (x : [[ A ]]) → is-prop (P x)) (d : (a : A) → P p[ a ]) where
+
+    postulate  -- HIT
+      f : Π [[ A ]] P
+      p[_]-β : ∀ a → f p[ a ] ↦ d a
+    {-# REWRITE p[_]-β #-}
+
+open PTruncElim public renaming (f to PTrunc-elim)
+
+module PTruncRec {{_ : PTRUNC}} {i j} {A : Type i} {B : Type j} (p : is-prop B)
+  (d : A → B) where
+
+  private
+    module M = PTruncElim (λ x → p) d
+
+  f : [[ A ]] → B
+  f = M.f
+
+open PTruncRec public renaming (f to PTrunc-rec)

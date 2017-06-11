@@ -172,3 +172,7 @@ module _ {{_ : FUNEXT}} {j} {P : A → Type j} {f g : Π A P} where
 
   λ=-equiv : (f ∼ g) ≃ (f == g)
   λ=-equiv = (λ= , λ=-is-equiv) where
+
+module _ {{_ : FUNEXT0}} {f g : A → Empty} where
+  postulate
+    λ=0 : f == g
