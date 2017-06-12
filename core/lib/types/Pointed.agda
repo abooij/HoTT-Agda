@@ -13,7 +13,7 @@ This file contains various lemmas that rely on lib.types.Paths or
 functional extensionality for pointed maps.
 -}
 
-module lib.types.Pointed {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
+module lib.types.Pointed {{_ : FUNEXT}} where
 
 {- Pointed maps -}
 
@@ -73,7 +73,7 @@ module _ {i j} {X : Ptd i} {Y : Ptd j} (⊙e : X ⊙≃ Y) where
   _⊙⁻¹ : Y ⊙≃ X
   _⊙⁻¹ = ⊙<– , is-equiv-inverse (snd ⊙e)
 
-module _ {i j} {X : Ptd i} {Y : Ptd j} where 
+module _ {i j} {X : Ptd i} {Y : Ptd j} where
 
   ⊙<–-inv-l : (⊙e : X ⊙≃ Y) → ⊙<– ⊙e ⊙∘ ⊙–> ⊙e ⊙∼ ⊙idf _
   ⊙<–-inv-l ⊙e = <–-inv-l (⊙≃-to-≃ ⊙e) , ↓-idf=cst-in' (lemma ⊙e) where

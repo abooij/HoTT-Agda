@@ -64,16 +64,16 @@ abstract
       → snd x a == snd x b ∙' p
     lemma x b ._ idp = idp
 
-  has-level-is-prop : {{_ : UA}} {{_ : FUNEXT}} → ∀ {i} {n : ℕ₋₂} {A : Type i}
+  has-level-is-prop : {{_ : FUNEXT}} → ∀ {i} {n : ℕ₋₂} {A : Type i}
     → is-prop (has-level n A)
   has-level-is-prop {n = ⟨-2⟩} = is-contr-is-prop
   has-level-is-prop {n = S n} =
     Π-level (λ x → Π-level (λ y → has-level-is-prop))
 
-  is-prop-is-prop : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i} {A : Type i} → is-prop (is-prop A)
+  is-prop-is-prop : {{_ : FUNEXT}}  → ∀ {i} {A : Type i} → is-prop (is-prop A)
   is-prop-is-prop = has-level-is-prop
 
-  is-set-is-prop : {{_ : UA}} {{_ : FUNEXT}}  → ∀ {i} {A : Type i} → is-prop (is-set A)
+  is-set-is-prop : {{_ : FUNEXT}}  → ∀ {i} {A : Type i} → is-prop (is-set A)
   is-set-is-prop = has-level-is-prop
 
 {- Subtypes. -}

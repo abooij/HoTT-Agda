@@ -7,7 +7,7 @@ open import lib.types.Nat
 open import lib.types.TLevel
 open import lib.types.Suspension
 
-module lib.types.IteratedSuspension {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
+module lib.types.IteratedSuspension {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} {{_ : PUSHOUT}} where
 
 ⊙Susp^ : ∀ {i} (n : ℕ) → Ptd i → Ptd i
 ⊙Susp^ O X = X

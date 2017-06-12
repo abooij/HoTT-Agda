@@ -8,7 +8,7 @@ open import lib.types.Span
 open import lib.types.Paths
 import lib.types.Generic1HIT as Generic1HIT
 
-module lib.types.Pushout {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
+module lib.types.Pushout {{_ : PUSHOUT}} where
 
 module _ {i j k} where
 
@@ -59,7 +59,7 @@ Pushout-rec-η : ∀ {i j k} {d : Span {i} {j} {k}} {l} {D : Type l} (f : Pushou
 Pushout-rec-η f = Pushout-elim (λ _ → idp) (λ _ → idp)
   (λ c → ↓-='-in' $ ! $ PushoutRec.glue-β (f ∘ left) (f ∘ right) (ap f ∘ glue) c)
 
-module PushoutGeneric {i j k} {d : Span {i} {j} {k}} where
+module PushoutGeneric {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} {i j k} {d : Span {i} {j} {k}} where
 
   open Span d renaming (f to g; g to h)
 
@@ -113,7 +113,7 @@ A ⊔^[ C ] B  / (f , g) = Pushout (span A B C f g)
 ⊙Pushout : ∀ {i j k} (d : ⊙Span {i} {j} {k}) → Ptd _
 ⊙Pushout d = ⊙[ Pushout (⊙Span-to-Span d) , left (pt (⊙Span.X d)) ]
 
-module _ {i j k} (d : ⊙Span {i} {j} {k}) where
+module _ {{_ : FUNEXT}} {i j k} (d : ⊙Span {i} {j} {k}) where
 
   open ⊙Span d
 

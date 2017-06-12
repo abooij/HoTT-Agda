@@ -65,6 +65,7 @@ postulate
   FUNEXT0 : Type lzero -- 0-valued function extensionality
   COIND : Type lzero -- coinduction
   PTRUNC : Type lzero -- propositional truncations
+  PUSHOUT : Type lzero
 
 {- Identity type
 

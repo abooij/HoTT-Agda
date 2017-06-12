@@ -13,7 +13,7 @@ open import lib.types.Unit
 
 -- Wedge of two pointed types is defined as a particular case of pushout
 
-module lib.types.Wedge {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
+module lib.types.Wedge {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} {{_ : PUSHOUT}} where
 
 module _ {i j} (X : Ptd i) (Y : Ptd j) where
 
@@ -150,7 +150,7 @@ module _ {i j} {X : Ptd i} {Y : Ptd j} where
 
   ∨-to-×-glue-β : ap ∨-to-× wglue == idp
   ∨-to-×-glue-β = WedgeToProduct.glue-β
-    
+
   abstract
     ↓-∨to×=cst-in : ∀ {x y} {p p' : (pt X , pt Y) == (x , y)}
       → p == p'
@@ -258,7 +258,7 @@ module _ {i i' j j' k} {X : Ptd i} {X' : Ptd i'} {Y : Ptd j}
         lemma₁ (f , idp) _ (winl* , idp) = idp
 
 module _ {i j k} (X : Ptd i) (Y : Ptd j) (Z : Ptd k) where
-    
+
   module WedgeAssocInl = WedgeRec {C = X ∨ (Y ⊙∨ Z)} winl (winr ∘ winl) wglue
   module WedgeAssoc = WedgeRec {X = X ⊙∨ Y} WedgeAssocInl.f (winr ∘ winr) (wglue ∙ ap winr wglue)
 

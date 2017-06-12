@@ -9,7 +9,7 @@ open import lib.types.Pointed
 
 -- Cofiber is defined as a particular case of pushout
 
-module lib.types.Cofiber {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
+module lib.types.Cofiber {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} {{_ : PUSHOUT}} where
 
 module _ {i j} {A : Type i} {B : Type j} (f : A → B) where
 

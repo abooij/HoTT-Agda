@@ -5,7 +5,7 @@ open import lib.types.Pi
 open import lib.types.Sigma
 open import lib.types.CommutingSquare
 
-module lib.types.Span {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
+module lib.types.Span where
 
 record Span {i j k : ULevel} : Type (lsucc (lmax (lmax i j) k)) where
   constructor span
@@ -27,7 +27,7 @@ private
   span=-raw idp idp idp idp idp = idp
 
 abstract
-  span= : ∀ {i j k} {A A' : Type i} (p : A ≃ A')
+  span= : {{_ : UA}} {{_ : FUNEXT}} → ∀ {i j k} {A A' : Type i} (p : A ≃ A')
     {B B' : Type j} (q : B ≃ B') {C C' : Type k} (r : C ≃ C')
     {f : C → A} {f' : C' → A'} (s : (a : C) → (–> p) (f a) == f' (–> r a))
     {g : C → B} {g' : C' → B'} (t : (b : C) → (–> q) (g b) == g' (–> r b))

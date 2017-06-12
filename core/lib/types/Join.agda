@@ -8,7 +8,7 @@ open import lib.types.PushoutFmap
 open import lib.types.Sigma
 open import lib.types.Span
 
-module lib.types.Join  {{_ : UA}} {{_ : FUNEXT}} {{_ : HIT}} where
+module lib.types.Join  {{_ : PUSHOUT}} where
 
 module _ {i j} (A : Type i) (B : Type j) where
 
@@ -72,7 +72,7 @@ module _ {i i' j j'} {A : Type i} {A' : Type i'} {B : Type j} {B' : Type j'}
   *-emap : A * B ≃ A' * B'
   *-emap = Pushout-emap *-span-emap
 
-module _ {i i' j j'} {X : Ptd i} {X' : Ptd i'} {Y : Ptd j} {Y' : Ptd j'} where
+module _ {{_ : FUNEXT}} {i i' j j'} {X : Ptd i} {X' : Ptd i'} {Y : Ptd j} {Y' : Ptd j'} where
 
   ⊙*-emap : X ⊙≃ X' → Y ⊙≃ Y' → X ⊙* Y ⊙≃ X' ⊙* Y'
   ⊙*-emap ⊙eqX ⊙eqY = ≃-to-⊙≃ (*-emap (⊙≃-to-≃ ⊙eqX) (⊙≃-to-≃ ⊙eqY)) (ap left (snd (⊙–> ⊙eqX)))
