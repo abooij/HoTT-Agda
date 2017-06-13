@@ -352,3 +352,7 @@ X ⊙≃⟨ u ⟩ v = v ⊙∘e u
 
 _⊙≃∎ : ∀ {i} (X : Ptd i) → X ⊙≃ X
 _⊙≃∎ = ⊙ide
+
+module _ {{_ : PROPEXT}} where
+  postulate  -- Univalence axiom
+    ua-prop : ∀ {i} {A B : Type i} → is-prop A → is-prop B → (A → B) → (B → A) → A == B
